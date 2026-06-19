@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub to IFTTT Webhook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">Webhook helper</p>
+      <h1>Connect GitHub to IFTTT</h1>
+      <p>
+        Build the IFTTT Webhooks URL for a GitHub repository webhook, then copy the
+        settings into GitHub.
+      </p>
+    </section>
+
+    <section class="panel" aria-labelledby="builder-title">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Step 1</p>
+          <h2 id="builder-title">Create your IFTTT trigger URL</h2>
+        </div>
+        <a class="link-button" href="https://ifttt.com/maker_webhooks" target="_blank" rel="noreferrer">
+          Open IFTTT Webhooks
+        </a>
+      </div>
+
+      <form id="webhook-form" class="form-grid">
+        <label>
+          IFTTT event name
+          <input id="event-name" name="eventName" type="text" value="github_push" autocomplete="off" required>
+        </label>
+
+        <label>
+          IFTTT Webhooks key
+          <input id="ifttt-key" name="iftttKey" type="password" placeholder="Paste your key here" autocomplete="off" required>
+        </label>
+
+        <button type="submit">Generate URL</button>
+      </form>
+
+      <div class="result-block">
+        <label for="payload-url">GitHub payload URL</label>
+        <div class="copy-row">
+          <input id="payload-url" type="text" readonly value="https://maker.ifttt.com/trigger/github_push/with/key/YOUR_KEY">
+          <button id="copy-url" type="button">Copy</button>
+        </div>
+        <p id="copy-status" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="github-title">
+      <p class="eyebrow">Step 2</p>
+      <h2 id="github-title">Add it in GitHub</h2>
+
+      <ol class="steps">
+        <li>Open your repository on GitHub, then go to <strong>Settings</strong> and <strong>Webhooks</strong>.</li>
+        <li>Choose <strong>Add webhook</strong> and paste the generated URL into <strong>Payload URL</strong>.</li>
+        <li>Set <strong>Content type</strong> to <strong>application/json</strong>.</li>
+        <li>Select the events you want, usually <strong>Just the push event</strong> for a first test.</li>
+        <li>Keep <strong>Active</strong> checked, then click <strong>Add webhook</strong>.</li>
+      </ol>
+
+      <div class="note">
+        GitHub sends a ping event after saving. In IFTTT, create an Applet with
+        <strong>Webhooks</strong> as the trigger and use the same event name.
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="test-title">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Step 3</p>
+          <h2 id="test-title">Send a browser test</h2>
+        </div>
+      </div>
+
+      <div class="sample-payload">
+        <label for="value-one">value1</label>
+        <input id="value-one" type="text" value="Test from GitHub webhook helper">
+
+        <label for="value-two">value2</label>
+        <input id="value-two" type="text" value="Repository push">
+
+        <label for="value-three">value3</label>
+        <input id="value-three" type="text" value="IFTTT connected">
+      </div>
+
+      <button id="send-test" type="button">Send test to IFTTT</button>
+      <p id="test-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
