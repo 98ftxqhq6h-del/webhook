@@ -1,0 +1,11 @@
+{
+  "name": "webhook",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Static GitHub to IFTTT webhook helper.",
+  "scripts": {
+    "build": "node -e \"console.log('Static site: no build step required')\"",
+    "test": "node --check script.js"
+  }
+}
